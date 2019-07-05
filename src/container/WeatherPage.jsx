@@ -33,7 +33,7 @@ class WeatherPage extends React.Component {
     {
         const API_KEY   = process.env.REACT_APP_IP_STACK_KEY;
 
-        fetch(`http://api.ipstack.com/check?access_key=${API_KEY}`)
+        fetch(`https://api.ipstack.com/check?access_key=${API_KEY}`)
             .then(response => response.json())
             .then(data => {
                 this.setState({ zipcode: data.zip });
@@ -45,7 +45,7 @@ class WeatherPage extends React.Component {
     weatherLookUp = (query) => 
     {
         const API_KEY   = process.env.REACT_APP_OPEN_WEATHER_KEY;
-        const baseUrl   = `http://api.openweathermap.org/data/2.5/forecast?`
+        const baseUrl   = `https://api.openweathermap.org/data/2.5/forecast?`
         const units     = this.state.units === 'metric' ? `&units=metric` :  `&units=imperial`
 
         const url = baseUrl + query + units + `&APPID=${API_KEY}`;
