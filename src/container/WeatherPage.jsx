@@ -33,7 +33,7 @@ class WeatherPage extends React.Component {
     {
         const API_KEY   = process.env.REACT_APP_IP_STACK_KEY;
 
-        fetch(`https://api.ipstack.com/check?access_key=${API_KEY}`)
+        fetch(`http://api.ipstack.com/check?access_key=${API_KEY}`)
             .then(response => response.json())
             .then(data => {
                 this.setState({ zipcode: data.zip });
@@ -49,7 +49,7 @@ class WeatherPage extends React.Component {
         const units     = this.state.units === 'metric' ? `&units=metric` :  `&units=imperial`
 
         const url = baseUrl + query + units + `&APPID=${API_KEY}`;
-
+        
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -107,7 +107,7 @@ class WeatherPage extends React.Component {
             city = '';
 
         // if we have both a name and a zipcode, continue to the next steps
-        } else if (searchBy === 'name' && zipcode && name) {
+        } else if (searchBy === 'name' && name) {
             city = USCities.find(USCity => USCity.name.toLowerCase() === name.toLowerCase());
 
         } else if (searchBy === 'lat/long') {
@@ -115,7 +115,6 @@ class WeatherPage extends React.Component {
                 USCity.coord.lat === parseFloat(lat) && USCity.coord.lon === parseFloat(long)
             );
         };
-        
 
         // If we are searching by name or lat/long anf found the city, 
         // make the call to the weather API with the cityID
